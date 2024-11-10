@@ -15,6 +15,8 @@ setup(
         #(os.path.join('share', package_name), glob('launch/*.py')),
   	    (os.path.join('share', package_name, 'urdf'), glob('urdf/*')),
         (os.path.join('share', package_name), glob('rviz/*')),
+        (os.path.join('share', package_name, 'config'), glob('config/*')),
+        (os.path.join('share', package_name, 'maps'), glob('maps/*')),
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
         (os.path.join('share', package_name, 'worlds'), glob('worlds/*')),
         (os.path.join('share', package_name, 'models/my_room'), glob('models/my_room/*')),

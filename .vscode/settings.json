@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/hidayat/develop/ros2/test_ws/build/urdf_test",
+        "/home/hidayat/develop/ros2/test_ws/install/urdf_test/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/hidayat/develop/ros2/test_ws/build/urdf_test",
+        "/home/hidayat/develop/ros2/test_ws/install/urdf_test/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
