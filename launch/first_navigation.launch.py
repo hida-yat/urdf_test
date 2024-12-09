@@ -28,7 +28,7 @@ def generate_launch_description():
         'nav2_default.yaml'
     )
     nav2_launch_file_dir = os.path.join(get_package_share_directory('nav2_bringup'), 'launch')
-    rviz = os.path.join(
+    rviz_config = os.path.join(
         get_package_share_directory('urdf_test'),
         'rviz',
         'nav2_default_view.rviz'
@@ -76,13 +76,11 @@ def generate_launch_description():
         parameters=[{'use_sim_time': True}]
     )
 
-    rviz2 = launch_ros.actions.Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        output='screen',
-        arguments=['-d', rviz],
-        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time', default='true')}]
+    rviz_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'rviz_launch.py')),
+        launch_arguments={
+            'use_sim_time': LaunchConfiguration('use_sim_time', default='true')
+        }.items()
     )
     robot_localization = launch_ros.actions.Node(
         package='robot_localization',
@@ -91,13 +89,22 @@ def generate_launch_description():
         output='screen',
         parameters=[ekf, {'use_sim_time': True}]
     )
-    bringup_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(nav2_launch_file_dir, 'bringup_launch.py')),
+    navigation_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(nav2_launch_file_dir, 'navigation_launch.py')),
         launch_arguments={
             'map': map_config,
             'use_sim_time': LaunchConfiguration('use_sim_time', default='true'),
             'params_file': nav_param}.items()
     )
+    localization_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'localization_launch.py')),
+        launch_arguments={
+            'use_sim_time': LaunchConfiguration('use_sim_time', default='true'),
+            'map': map_config
+        }.items()
+    )
+
+    
 
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='model', default_value=default_model_path,
@@ -109,6 +116,7 @@ def generate_launch_description():
         gzclient_cmd,
         spawn_entity,
         robot_localization,
-        bringup_launch,
-        rviz2
+        navigation_launch,
+        localization_launch,
+        rviz_launch
     ])

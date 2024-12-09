@@ -68,17 +68,17 @@
         <geometry>
             <cylinder length="${wheellen}" radius="${wheelrad}"/>
         </geometry>
-        <origin rpy="0 1.57075 0" xyz="0 0 0"/>
+        <origin rpy="1.57075 0 0" xyz="0 0 0"/>
         <material name="black"/>
         </visual>
         <collision>
             <geometry>
                 <cylinder length="${wheellen}" radius="${wheelrad}"/>
             </geometry>
-            <origin rpy="0 1.57075 0" xyz="0 0 0"/>
+            <origin rpy="1.57075 0 0" xyz="0 0 0"/>
         </collision>
         <inertial>
-            <origin rpy="0 1.57075 0" xyz="0 0 0"/>
+            <origin rpy="1.57075 0 0" xyz="0 0 0"/>
             <mass value="1"/>
             <inertia ixx="${1/4*1*wheelrad*wheelrad+1/12*2*wheellen}" ixy="0.0" ixz="0.0" iyy="${1/4*1*wheelrad*wheelrad+1/12*2*wheellen}" iyz="0.0" izz="${1/2*1*wheelrad*wheelrad}"/>
         </inertial>
@@ -95,17 +95,17 @@
         <geometry>
             <cylinder length="${wheellen}" radius="${wheelrad}"/>
         </geometry>
-        <origin rpy="0 1.57075 0" xyz="0 0 0"/>
+        <origin rpy="1.57075 0 0" xyz="0 0 0"/>
         <material name="black"/>
         </visual>
         <collision>
             <geometry>
                 <cylinder length="${wheellen}" radius="${wheelrad}"/>
             </geometry>
-            <origin rpy="0 1.57075 0" xyz="0 0 0"/>
+            <origin rpy="1.57075 0 0" xyz="0 0 0"/>
         </collision>
         <inertial>
-            <origin rpy="0 1.57075 0" xyz="0 0 0"/>
+            <origin rpy="1.57075 0 0" xyz="0 0 0"/>
             <mass value="1"/>
             <inertia ixx="${1/4*1*wheelrad*wheelrad+1/12*2*wheellen}" ixy="0.0" ixz="0.0" iyy="${1/4*1*wheelrad*wheelrad+1/12*2*wheellen}" iyz="0.0" izz="${1/2*2*wheelrad*wheelrad}"/>
         </inertial>
@@ -122,28 +122,29 @@
         <geometry>
             <sphere radius="0.05"/>
         </geometry>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <origin  xyz="0 0 0"/>
         <material name="black"/>
         </visual>
         <collision>
             <geometry>
                 <sphere radius="0.05"/>
             </geometry>
-            <origin rpy="0 0 0" xyz="0 0 0"/>            
+            <origin xyz="0 0 0"/>            
         </collision>
         <inertial>
-            <origin rpy="0 1.57075 0" xyz="0 0 0"/>
+            <origin  xyz="0 0 0"/>
             <mass value="1"/>
             <inertia ixx="${2/5*1*0.05*0.05}" ixy="0" ixz="0" iyy="${2/5*1*0.05*0.05}" iyz="0" izz="${2/5*1*0.05*0.05}"/>
         </inertial>
     </link>
-    <!--
+
+
     <gazebo reference="caster_wheel">
         <material>
             Gazebo/Red
         </material>
     </gazebo>    
-    -->
+
 
     <!--###########ジョイントの作成##########-->
     <!--base_footprintとbase_link-->
@@ -163,25 +164,26 @@
     <joint name="base_link_to_right_wheel" type="continuous">
         <parent link="base_link"/>
         <child link="right_wheel"/>
-        <origin xyz = "${baserad+wheellen/2} 0 ${wheelrad}"/>
-        <axis xyz = "1 0 0"/>
+        <origin xyz = "0 ${-(baserad+wheellen/2)} ${wheelrad}"/>
+        <axis xyz = "0 1 0"/>
     </joint>
 
     <!--base_linkとleft_wheel-->
     <joint name="base_link_to_left_wheel" type="continuous">
         <parent link="base_link"/>
         <child link="left_wheel"/>
-        <origin xyz = "${-(baserad+wheellen/2)} 0 ${wheelrad}"/>
-        <axis xyz = "1 0 0"/>
+        <origin xyz = "0 ${baserad+wheellen/2} ${wheelrad}"/>
+        <axis xyz = "0 1 0"/>
     </joint>
 
     <!--base_linkとcaster_wheel-->
     <joint name="base_link_to_caster_wheel" type="fixed">
         <parent link="base_link"/>
         <child link="caster_wheel"/>
-        <origin xyz = "0 0.25 0.05"/>
-        <axis xyz = "1 0 0"/>
+        <origin xyz = "-0.25 0 0.05"/>
+        <axis xyz = "0 1 0"/>
     </joint>
+
 
     <gazebo>
     <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
@@ -191,16 +193,16 @@
         <right_joint>base_link_to_right_wheel</right_joint>
 
         <!-- kinematics -->
-        <wheel_separation>1</wheel_separation>
+        <wheel_separation>1.05</wheel_separation>
         <wheel_diameter>0.1</wheel_diameter>
 
         <!-- limits -->
-        <max_wheel_torque>10</max_wheel_torque>
+        <max_wheel_torque>20</max_wheel_torque>
         <max_wheel_acceleration>1.0</max_wheel_acceleration>
 
         <!-- output -->
-        <publish_odom>true</publish_odom>
-        <publish_odom_tf>true</publish_odom_tf>
+        <publish_odom>True</publish_odom>
+        <publish_odom_tf>True</publish_odom_tf>
         <publish_wheel_tf>false</publish_wheel_tf>
         <publish_tf>true</publish_tf>
 
