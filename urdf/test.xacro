@@ -156,7 +156,7 @@
     <joint name="base_link_to_LiDAR" type="fixed">
         <parent link="base_link"/>
         <child link="LiDAR"/>
-        <origin xyz = "0 0 ${baselen+0.05+0.05/2}"/>
+        <origin xyz = "${baserad} 0 ${0.05+0.05/2}"/>
     <axis xyz = "0 0 1"/>
     </joint>
 
@@ -224,8 +224,8 @@
                     <horizontal>
                         <samples>360</samples>
                         <resolution>1.0</resolution>
-                        <min_angle>0.0</min_angle>
-                        <max_angle>6.28</max_angle>
+                        <min_angle>4.71</min_angle>
+                        <max_angle>7.85</max_angle>
                     </horizontal>
                 </scan>
                 <range>

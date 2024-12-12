@@ -20,7 +20,6 @@ setup(
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
         (os.path.join('share', package_name, 'worlds'), glob('worlds/*')),
         (os.path.join('share', package_name, 'models/my_room'), glob('models/my_room/*')),
-        (os.path.join('build', package_name, 'models/my_room'), glob('models/my_room/*'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -31,7 +30,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'robot_state_publisher = robot_stete_publisher.robot_state_publisher:main'
+            'robot_state_publisher = urdf_test.robot_state_publisher:main'
 
         ],
     },

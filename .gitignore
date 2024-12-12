@@ -1,2 +1,10 @@
 
 self_driving_tutorial/
+worlds/nhk2025_field.world
+models/nhk2025_field/meshes/nhk2025_field.stl
+models/nhk2025_field/meshes/nhk2025_field.dae
+launch/gazebo.launch.py
+launch/gazebo.launch.py
+models/nhk2025_field/model.config
+models/nhk2025_field/model.sdf
+launch/gazebo.launch.py

@@ -14,7 +14,7 @@ def generate_launch_description():
     world = os.path.join(
         get_package_share_directory('urdf_test'),
         'worlds',
-        'my_room.world'
+        'nhk2025_field.world'
     )
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
 
