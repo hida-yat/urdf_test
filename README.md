@@ -7,5 +7,5 @@
 map_server:
   ros__parameters:
     use_sim_time: False
-    yaml_filename: "/path/to/your/map_yaml_file"
+    yaml_filename: "full/path/to/your/map_yaml_file"
 ```
